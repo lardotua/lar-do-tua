@@ -3,7 +3,7 @@
    Os quartos são geridos pelo painel em /admin
    ============================================================ */
 
-const WHATSAPP_NUMBER = "351000000000";
+const WHATSAPP_NUMBER = "+351 910 788 449";
 
 /* ============================================================
    NAVEGAÇÃO
