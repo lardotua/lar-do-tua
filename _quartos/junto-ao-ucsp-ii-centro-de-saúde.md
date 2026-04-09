@@ -6,6 +6,28 @@ location: R. Alegria 57
 desc: >-
   Quartos com suite para alugar c/ recibo.
 
+
+  Todos com
+
+  - ar condicionado
+
+  - frigorífico
+
+  - roupeiro
+
+  - tv
+
+  - net
+
+  - cama
+
+  - mesa cabeceira
+
+  - secretaria
+
+  - casa de banho privativa
+
+
   Zonas comuns: cozinha/ sala convívio com todos os eletrodomésticos, máquina lavar e secar, com limpezas semanais nestas zonas.
 
 
