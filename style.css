@@ -1,0 +1,665 @@
+/* ============================================================
+   LAR DO TUA — style.css
+   ============================================================
+
+   ÍNDICE DE SECÇÕES EDITÁVEIS:
+   1.  CORES & TIPOGRAFIA  ←  Muda cores e fontes do site inteiro aqui
+   2.  LAYOUT BASE         ←  Largura máxima, espaçamentos gerais
+   3.  BOTÕES              ←  Aparência de todos os botões
+   4.  BARRA DE NAVEGAÇÃO  ←  Navbar topo
+   5.  HERO (BANNER)       ←  Secção principal da homepage
+   6.  GRELHAS             ←  Layouts de 2 e 3 colunas
+   7.  CARDS               ←  Caixas de conteúdo genéricas
+   8.  CARDS DE QUARTO     ←  Listagem de quartos
+   9.  PÁGINA DE DETALHE   ←  Página individual de cada quarto
+   10. FORMULÁRIO          ←  Formulário de contacto
+   11. RODAPÉ (FOOTER)     ←  Rodapé do site
+   12. BOTÃO WHATSAPP      ←  Botão flutuante do WhatsApp
+   13. RESPONSIVO          ←  Ajustes para telemóvel
+   ============================================================ */
+
+
+/* ============================================================
+   1. CORES & TIPOGRAFIA
+   ↓ Edita aqui para mudar todo o esquema de cores do site
+   ============================================================ */
+:root {
+  /* Fundo geral da página */
+  --bg: #f7f5f0;
+
+  /* Cor principal do texto */
+  --fg: #1e2a3a;
+
+  /* Fundo dos cards/caixas */
+  --card: #ffffff;
+
+  /* Cor primária (verde) — usada no logo, botões activos, etc. */
+  --primary: #4a7c6f;
+  --primary-fg: #ffffff;   /* texto sobre a cor primária */
+
+  /* Cor secundária (bege) — fundos de secções alternadas */
+  --secondary: #f0ece4;
+  --secondary-fg: #1e2a3a;
+
+  /* Cor de destaque (laranja) — preços, botões principais */
+  --accent: #d4622a;
+  --accent-fg: #ffffff;    /* texto sobre a cor de destaque */
+
+  /* Texto suave (cinzento) — descrições, subtítulos */
+  --muted: #6b7b8d;
+
+  /* Cor das bordas/linhas */
+  --border: #e4dfd5;
+
+  /* Verde do WhatsApp — não alterar se queres manter branding */
+  --whatsapp: #25d366;
+
+  /* Raio dos cantos arredondados (ex: 0 = sem arredondamento) */
+  --radius: 0.75rem;
+}
+
+/* Fontes — substitui os nomes aqui para mudar a tipografia */
+/* (lembra-te de actualizar o link do Google Fonts no HTML também) */
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* Tamanhos dos títulos */
+h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; color: var(--fg); }
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.25rem; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+/* ============================================================
+   2. LAYOUT BASE
+   ↓ Edita a largura máxima do conteúdo e espaçamentos gerais
+   ============================================================ */
+
+/* Largura máxima do conteúdo centrado */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+/* Espaçamento vertical das secções */
+.section { padding: 4rem 0; }
+
+/* Utilitários de alinhamento e espaço */
+.text-center  { text-align: center; }
+.text-muted   { color: var(--muted); }
+.mb-8         { margin-bottom: 2rem; }
+.mb-12        { margin-bottom: 3rem; }
+.mx-auto      { margin-left: auto; margin-right: auto; }
+.bg-secondary { background: var(--secondary); }
+.section-title { text-align: center; margin-bottom: 3rem; }
+
+
+/* ============================================================
+   3. BOTÕES
+   ↓ Edita o aspecto, tamanho e raio dos botões
+   ============================================================ */
+
+/* Base de todos os botões */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;       /* ↑ muda o tamanho interno */
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+.btn:hover { opacity: 0.9; }
+
+/* Botão de destaque (laranja) */
+.btn-accent { background: var(--accent); color: var(--accent-fg); }
+
+/* Botão do WhatsApp (verde) */
+.btn-whatsapp { background: var(--whatsapp); color: #fff; }
+
+/* Botão pequeno (ex: no navbar) */
+.btn-sm { padding: 0.5rem 1rem; font-size: 0.875rem; }
+
+/* Botão WhatsApp com borda (usado no rodapé) */
+.btn-whatsapp-outline {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 0.875rem;
+  display: inline-block;
+  transition: background 0.2s;
+}
+.btn-whatsapp-outline:hover { background: rgba(255,255,255,0.25); }
+
+
+/* ============================================================
+   4. BARRA DE NAVEGAÇÃO
+   ↓ Edita altura, fundo, cor do logo e links da navbar
+   ============================================================ */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255,255,255,0.92);   /* ← fundo da barra */
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;   /* ← altura da barra */
+}
+
+/* Logo — imagem */
+.logo { text-decoration: none; display: flex; align-items: center; }
+.logo-img {
+  height: 2.8rem;   /* ← altura da logo na navbar — aumenta ou diminui à vontade */
+  width: auto;
+  display: block;
+}
+
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+
+/* Links do menu */
+.nav-link {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted);      /* ← cor normal */
+  transition: color 0.2s;
+}
+.nav-link:hover,
+.nav-link.active { color: var(--primary); }  /* ← cor activo/hover */
+
+/* Botão hambúrguer (só aparece no telemóvel) */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+.mobile-toggle span { display: block; width: 24px; height: 2px; background: var(--fg); transition: 0.3s; }
+.mobile-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.mobile-toggle.open span:nth-child(2) { opacity: 0; }
+.mobile-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+
+/* ============================================================
+   5. HERO (BANNER PRINCIPAL)
+   ↓ Edita o gradiente de fundo, altura e animação do banner
+   ============================================================ */
+
+.hero {
+  position: relative;
+  /* ↓ Imagem de fundo do hero — para trocar, substitui o ficheiro hero.jpg
+       ou muda para: background: linear-gradient(135deg, var(--primary) 0%, #3a5f54 100%) */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* Sobreposição escura sobre o fundo */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.3);   /* ← aumenta/diminui a opacidade */
+}
+
+.hero-content {
+  position: relative;
+  padding: 6rem 0;   /* ← altura do hero */
+  text-align: center;
+  color: #fff;
+}
+
+/* Título do hero */
+.hero-content h1 {
+  color: #fff;
+  font-size: 3rem;   /* ← tamanho do título principal */
+  margin-bottom: 1rem;
+  animation: fadeIn 0.6s ease;
+}
+
+/* Subtítulo do hero */
+.hero-sub {
+  font-size: 1.2rem;
+  opacity: 0.85;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  animation: fadeIn 0.6s 0.15s both;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeIn 0.6s 0.3s both;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+
+/* ============================================================
+   6. GRELHAS
+   ↓ Edita espaçamento entre colunas
+   ============================================================ */
+
+/* 3 colunas */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+/* 2 colunas */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+
+
+/* ============================================================
+   7. CARDS GENÉRICOS
+   ↓ Edita aparência das caixas de conteúdo
+   ============================================================ */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;                              /* ← espaço interno */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);    /* ← sombra */
+}
+.card-center { text-align: center; }
+.card-center p { color: var(--muted); font-size: 0.875rem; margin-top: 0.5rem; }
+
+/* Círculo com ícone (secção "Porquê escolher-nos?") */
+.icon-circle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgba(74,124,111,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: var(--primary);
+}
+.icon-accent { background: rgba(212,98,42,0.1); color: var(--accent); }
+
+/* Número dos passos ("Como Funciona") */
+.step-number {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--primary);   /* ← cor do círculo numerado */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem;
+  margin: 0 auto 1rem;
+}
+
+
+/* ============================================================
+   8. CARDS DE QUARTO
+   ↓ Edita as caixas da listagem de quartos
+   ============================================================ */
+
+.room-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Altura da imagem do quarto */
+.room-card img { width: 100%; height: 13rem; object-fit: cover; }
+
+.room-card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+.room-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem; }
+.room-card-header h3 { font-size: 1.1rem; }
+
+/* Preço do quarto — cor e estilo */
+.room-price { color: var(--accent); font-weight: 700; white-space: nowrap; margin-left: 0.5rem; }
+.room-location { color: var(--muted); font-size: 0.875rem; margin-bottom: 0.5rem; }
+.room-desc { color: rgba(30,42,58,0.7); font-size: 0.875rem; margin-bottom: 1rem; flex: 1; }
+.room-card .btn { text-align: center; padding: 0.625rem; font-size: 0.875rem; }
+
+
+/* ============================================================
+   9. PÁGINA DE DETALHE DO QUARTO
+   ============================================================ */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--fg); }
+
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+
+/* --- GALERIA --- */
+.gallery-col { position: relative; }
+
+.gallery-main-wrap {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: zoom-in;
+  background: #000;
+}
+.gallery-main-wrap img {
+  width: 100%;
+  height: 24rem;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.gallery-main-wrap img:active { opacity: 0.9; }
+
+.zoom-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.slide-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.45);
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  padding: 6px 14px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.2s;
+  z-index: 2;
+}
+.slide-arrow:hover { background: rgba(0,0,0,0.75); }
+.slide-prev { left: 8px; }
+.slide-next { right: 8px; }
+
+.slide-counter {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.gallery-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.thumb-btn {
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+.thumb-btn.active { border-color: var(--primary); }
+.thumb-btn img { width: 4.5rem; height: 3.5rem; object-fit: cover; display: block; }
+
+/* --- DESCRIÇÃO VER MAIS --- */
+.desc-block { margin-bottom: 1.25rem; }
+.desc-text { color: rgba(30,42,58,0.85); line-height: 1.8; white-space: pre-line; }
+.desc-collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ver-mais-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  margin-top: 0.25rem;
+  font-family: 'DM Sans', sans-serif;
+}
+.ver-mais-btn:hover { text-decoration: underline; }
+
+/* --- BADGES --- */
+.detail-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.25rem 0; }
+.badge { padding: 0.5rem 1rem; border-radius: var(--radius); font-size: 0.875rem; font-weight: 600; }
+.badge-accent   { background: var(--accent); color: var(--accent-fg); font-size: 1.1rem; }
+.badge-secondary { background: var(--secondary); color: var(--secondary-fg); }
+
+/* --- O QUE INCLUI --- */
+.detail-includes { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.25rem; }
+.detail-includes ul { list-style: none; }
+.detail-includes li { padding: 0.35rem 0; font-size: 0.875rem; color: rgba(30,42,58,0.8); display: flex; align-items: center; gap: 0.5rem; }
+.detail-includes li::before { content: "✓"; color: var(--primary); font-weight: 700; }
+
+/* --- LIGHTBOX --- */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.93);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+.lightbox-overlay img {
+  max-width: 92vw;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 8px;
+  pointer-events: none;
+  user-select: none;
+}
+.lb-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.lb-close:hover { background: rgba(255,255,255,0.3); }
+.lb-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  line-height: 1;
+}
+.lb-arrow:hover { background: rgba(255,255,255,0.3); }
+.lb-prev { left: 12px; }
+.lb-next { right: 12px; }
+.lb-counter {
+  color: rgba(255,255,255,0.55);
+  font-size: 0.875rem;
+  margin-top: 10px;
+}
+
+
+/* ============================================================
+   10. FORMULÁRIO DE CONTACTO
+   ↓ Edita campos de input e estilos do formulário
+   ============================================================ */
+
+.contact-item { margin-bottom: 1.5rem; }
+.contact-item p { color: var(--muted); margin-top: 0.25rem; }
+
+.contact-form { display: flex; flex-direction: column; gap: 1rem; }
+.contact-form label { font-weight: 500; font-size: 0.875rem; }
+.contact-form input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  background: var(--card);
+  outline: none;
+  transition: border-color 0.2s;
+}
+/* Cor da borda quando o campo está seleccionado */
+.contact-form input:focus { border-color: var(--primary); }
+
+/* Mensagem de sucesso após envio */
+.form-success { margin-top: 1rem; padding: 1rem; background: var(--secondary); border-radius: var(--radius); }
+
+
+/* ============================================================
+   11. RODAPÉ (FOOTER)
+   ↓ Edita cor de fundo, links e espaçamento do rodapé
+   ============================================================ */
+
+.footer {
+  background: var(--primary);   /* ← cor de fundo do rodapé */
+  color: var(--primary-fg);
+  padding: 3rem 0;
+  margin-top: 5rem;
+}
+.footer h3, .footer h4 { color: #fff; }
+.footer p, .footer a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.875rem; }
+.footer a:hover { color: #fff; }
+.footer-grid > div:nth-child(2) { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.2);
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: rgba(255,255,255,0.5);
+}
+
+
+/* ============================================================
+   12. BOTÃO FLUTUANTE DO WHATSAPP
+   ↓ Edita posição, tamanho e cor do botão verde fixo
+   ============================================================ */
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.5rem;   /* ← distância do fundo */
+  right: 1.5rem;    /* ← distância da direita */
+  z-index: 50;
+  background: var(--whatsapp);
+  color: #fff;
+  width: 3.5rem;    /* ← tamanho do botão */
+  height: 3.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+
+
+/* ============================================================
+   SISTEMA DE PÁGINAS (não editar)
+   ============================================================ */
+.page        { display: none; }
+.page.active { display: block; }
+
+
+/* ============================================================
+   13. RESPONSIVO — TELEMÓVEL
+   ↓ Ajustes automáticos para ecrãs pequenos
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* Reduz tamanhos de título no telemóvel */
+  h1 { font-size: 2rem; }
+  .hero-content h1 { font-size: 2.2rem; }
+  .hero-content { padding: 4rem 0; }
+
+  /* Grelhas passam a uma coluna */
+  .grid-3  { grid-template-columns: 1fr; }
+  .grid-2  { grid-template-columns: 1fr; }
+  .detail-grid { grid-template-columns: 1fr; }
+
+  /* Reduz altura da imagem principal */
+  .gallery-main-wrap img { height: 16rem; }
+  .lb-arrow { font-size: 1.75rem; padding: 6px 10px; }
+  .thumb-btn img { width: 3.5rem; height: 2.75rem; }
+
+  /* Menu mobile */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    gap: 0.75rem;
+  }
+  .nav-links.open  { display: flex; }
+  .mobile-toggle   { display: flex; }
+}
