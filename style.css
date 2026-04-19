@@ -1,0 +1,512 @@
+/* ============================================================
+   LAR DO TUA — style.css
+
+   GUIA RÁPIDO — onde editar cada coisa:
+   ─────────────────────────────────────────────────────────────
+   CORES DO SITE INTEIRO  →  secção 1 (:root), logo abaixo
+   FONTE DO SITE          →  secção 1, body { font-family }
+   FUNDO DA PÁGINA        →  secção 1, --bg
+   COR DOS TÍTULOS/TEXTO  →  secção 1, --fg
+   AZUL PRINCIPAL         →  secção 1, --primary
+   AMARELO DE DESTAQUE    →  secção 1, --accent
+   COR DO WHATSAPP        →  secção 1, --whatsapp
+   CANTOS ARREDONDADOS    →  secção 1, --radius
+
+   NAVBAR (barra topo)    →  secção 4
+   FUNDO DA NAVBAR        →  secção 4, .navbar background
+   COR DOS LINKS NAVBAR   →  secção 4, .nav-link color
+   HOVER/ACTIVO NAVBAR    →  secção 4, .nav-link.active color
+   ALTURA DA NAVBAR       →  secção 4, .nav-container height
+   TAMANHO DA LOGO        →  secção 4, .logo-img height
+
+   HERO (banner)          →  secção 5
+   FUNDO DO HERO          →  secção 5, .hero background
+   ALTURA DO HERO         →  secção 5, .hero-content padding
+   TÍTULO/SUBTÍTULO HERO  →  index.html, secção HOME
+
+   BOTÕES                 →  secção 3
+   BOTÃO AMARELO          →  secção 3, .btn-accent
+   BOTÃO WHATSAPP         →  secção 3, .btn-whatsapp
+   BOTÃO PEQUENO NAVBAR   →  secção 3, .btn-sm
+
+   CARDS DOS QUARTOS      →  secção 8
+   ALTURA DA FOTO CARD    →  secção 8, .room-card img height
+   COR DO PREÇO           →  secção 8, .room-price color
+
+   RODAPÉ                 →  secção 11
+   FUNDO DO RODAPÉ        →  secção 11, .footer background
+   TÍTULOS DO RODAPÉ      →  secção 11, .footer h3/h4 color
+
+   BOTÃO WHATSAPP FIXO    →  secção 12
+   POSIÇÃO DO BOTÃO       →  secção 12, bottom / right
+   TAMANHO DO BOTÃO       →  secção 12, width / height
+
+   TEXTOS DO SITE         →  index.html (edita directamente)
+   NÚMERO WHATSAPP        →  script.js, linha 6 (WHATSAPP_NUMBER)
+   ─────────────────────────────────────────────────────────────
+   ============================================================ */
+
+
+/* ============================================================
+   1. CORES & TIPOGRAFIA
+   ↓ EDITA AQUI para mudar cores do site inteiro de uma vez.
+     Todas as outras secções usam estas variáveis automaticamente.
+   ============================================================ */
+:root {
+  --bg:           #f0f6fd;   /* ← COR DE FUNDO da página inteira */
+  --fg:           #131313;   /* ← COR PRINCIPAL do texto */
+  --card:         #ffcf02;   /* ← FUNDO DOS CARDS/CAIXAS */
+
+  --primary:      #3795d2;   /* ← AZUL PRINCIPAL (navbar, links activos, ícones) */
+  --primary-fg:   #ffffff;   /* ← texto sobre o azul principal */
+
+  --secondary:    #3795d2;   /* ← AZUL ESCURO (secções alternadas, badges) */
+  --secondary-fg: #ffffff;   /* ← texto sobre o azul escuro */
+
+  --accent:       #ffcf02;   /* ← AMARELO DE DESTAQUE (botões, preços) */
+  --accent-fg:    #0d1f35;   /* ← texto sobre o amarelo */
+
+  --muted:        #131313;   /* ← COR DO TEXTO SUAVE (subtítulos, descrições) */
+  --border:       #c8ddf0;   /* ← COR DAS BORDAS */
+  --whatsapp:     #25d366;   /* ← COR DO BOTÃO WHATSAPP (não alterar) */
+  --radius:       0.75rem;   /* ← ARREDONDAMENTO DOS CANTOS (0 = sem arredondamento) */
+}
+
+/* ↓ FONTE DO SITE */
+body {
+  font-family: 'DM Sans', sans-serif;   /* ← FONTE GERAL do site */
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+
+/* ↓ TAMANHOS DOS TÍTULOS */
+h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; color: var(--fg); }
+h1 { font-size: 2.5rem; }   /* ← tamanho H1 */
+h2 { font-size: 2rem; }     /* ← tamanho H2 */
+h3 { font-size: 1.25rem; }  /* ← tamanho H3 */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+/* ============================================================
+   2. LAYOUT BASE — raramente precisas de editar
+   ============================================================ */
+.container     { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }  /* ← largura máxima */
+.section       { padding: 4rem 0; }   /* ← espaço vertical entre secções */
+.text-center   { text-align: center; }
+.text-muted    { color: var(--muted); }
+.mb-8          { margin-bottom: 2rem; }
+.mb-12         { margin-bottom: 3rem; }
+.mx-auto       { margin-left: auto; margin-right: auto; }
+.bg-secondary  { background: var(--secondary); }
+.section-title { text-align: center; margin-bottom: 3rem; }
+
+
+/* ============================================================
+   3. BOTÕES
+   ↓ Edita o aspecto de cada tipo de botão
+   ============================================================ */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;       /* ← tamanho interno dos botões */
+  border-radius: var(--radius);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+.btn:hover { opacity: 0.9; }
+
+.btn-accent   { background: var(--accent); color: var(--accent-fg); }   /* ← BOTÃO AMARELO */
+.btn-whatsapp { background: var(--whatsapp); color: #fff; }              /* ← BOTÃO WHATSAPP VERDE */
+.btn-sm       { padding: 0.5rem 1rem; font-size: 0.875rem; }             /* ← BOTÃO PEQUENO (navbar) */
+
+.btn-whatsapp-outline {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 0.875rem;
+  display: inline-block;
+  transition: background 0.2s;
+}
+.btn-whatsapp-outline:hover { background: rgba(255,255,255,0.25); }
+
+
+/* ============================================================
+   4. BARRA DE NAVEGAÇÃO (NAVBAR)
+   ↓ Edita aqui a barra do topo do site
+   ============================================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #2579be;          /* ← COR DE FUNDO DA NAVBAR */
+  
+}
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;   /* ← ALTURA DA NAVBAR */
+}
+
+.logo     { text-decoration: none; display: flex; align-items: center; }
+.logo-img { height: 2.8rem; width: auto; display: block; }   /* ← TAMANHO DA LOGO */
+
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+
+.nav-link {
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255,255,255,0.8);   /* ← COR DOS LINKS DA NAVBAR */
+  transition: color 0.2s;
+}
+.nav-link:hover,
+.nav-link.active { color: #f5c300; }   /* ← COR DO LINK ACTIVO/HOVER (amarelo) */
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+.mobile-toggle span { display: block; width: 24px; height: 2px; background: #fff; transition: 0.3s; }
+.mobile-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.mobile-toggle.open span:nth-child(2) { opacity: 0; }
+.mobile-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+
+/* ============================================================
+   5. HERO (BANNER PRINCIPAL DA HOMEPAGE)
+   ↓ Edita aqui o banner grande da homepage
+   ============================================================ */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #2579be 0%, #1a5f96 100%);
+  /* ← COR DE FUNDO DO HERO — para usar imagem:
+     background: url('hero.jpg') center/cover no-repeat; */
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.15);   /* ← ESCURECIMENTO SOBRE O FUNDO (0=nenhum, 0.5=meio) */
+}
+
+.hero-content {
+  position: relative;
+  padding: 6rem 0;   /* ← ALTURA DO HERO (aumenta para ficar mais alto) */
+  text-align: center;
+  color: #fff;
+}
+
+.hero-content h1 {
+  color: #fff;
+  font-size: 3rem;   /* ← TAMANHO DO TÍTULO DO HERO */
+  margin-bottom: 1rem;
+  animation: fadeIn 0.6s ease;
+}
+
+.hero-sub {
+  font-size: 1.2rem;   /* ← TAMANHO DO SUBTÍTULO DO HERO */
+  opacity: 0.85;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  animation: fadeIn 0.6s 0.15s both;
+}
+
+.hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeIn 0.6s 0.3s both; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+
+/* ============================================================
+   6. GRELHAS — não editar
+   ============================================================ */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+
+
+/* ============================================================
+   7. CARDS GENÉRICOS
+   ↓ Edita as caixas brancas de conteúdo
+   ============================================================ */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;                            /* ← ESPAÇO INTERNO DOS CARDS */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);  /* ← SOMBRA */
+}
+.card-center   { text-align: center; }
+.card-center p { color: var(--muted); font-size: 0.875rem; margin-top: 0.5rem; }
+
+.icon-circle {
+  width: 3.5rem; height: 3.5rem; border-radius: 50%;
+  background: rgba(37,121,190,0.1);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1rem; color: var(--primary);
+}
+.icon-accent { background: rgba(245,195,0,0.15); color: var(--accent); }
+
+.step-number {
+  width: 3rem; height: 3rem; border-radius: 50%;
+  background: var(--primary);   /* ← COR DO CÍRCULO NUMERADO ("Como Funciona") */
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'DM Serif Display', serif; font-size: 1.25rem;
+  margin: 0 auto 1rem;
+}
+
+
+/* ============================================================
+   8. CARDS DE QUARTO (listagem de quartos)
+   ↓ Edita as caixas de cada quarto na listagem
+   ============================================================ */
+.room-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  display: flex; flex-direction: column;
+}
+
+.room-card img { width: 100%; height: 13rem; object-fit: cover; }   /* ← ALTURA DA FOTO NO CARD */
+
+.room-card-body   { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+.room-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.25rem; }
+.room-card-header h3 { font-size: 1.1rem; }
+
+.room-price    { color: var(--accent); font-weight: 700; white-space: nowrap; margin-left: 0.5rem; }  /* ← COR DO PREÇO */
+.room-location { color: var(--muted); font-size: 0.875rem; margin-bottom: 0.5rem; }
+.room-desc     { color: rgba(13,31,53,0.7); font-size: 0.875rem; margin-bottom: 1rem; flex: 1; }
+.room-card .btn { text-align: center; padding: 0.625rem; font-size: 0.875rem; }
+
+
+/* ============================================================
+   9. PÁGINA DE DETALHE DO QUARTO
+   ↓ Edita o layout da página de cada quarto individual
+   ============================================================ */
+.back-link {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  color: var(--muted); text-decoration: none; font-size: 0.875rem;
+  margin-bottom: 1.5rem; transition: color 0.2s;
+}
+.back-link:hover { color: var(--fg); }
+
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+
+/* GALERIA */
+.gallery-col { position: relative; }
+
+.gallery-main-wrap {
+  position: relative; border-radius: var(--radius);
+  overflow: hidden; cursor: zoom-in; background: #000;
+}
+.gallery-main-wrap img {
+  width: 100%;
+  height: 24rem;   /* ← ALTURA DA FOTO PRINCIPAL NA PÁGINA DE DETALHE */
+  object-fit: cover; display: block;
+  transition: opacity 0.2s; user-select: none; -webkit-user-drag: none;
+}
+.gallery-main-wrap img:active { opacity: 0.9; }
+
+.zoom-hint {
+  position: absolute; bottom: 10px; right: 10px;
+  background: rgba(0,0,0,0.55); color: #fff;
+  font-size: 0.72rem; padding: 3px 8px; border-radius: 6px; pointer-events: none;
+}
+
+.slide-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(0,0,0,0.45);   /* ← COR DAS SETAS DO CARROSSEL */
+  color: #fff; border: none; font-size: 2rem; line-height: 1;
+  padding: 6px 14px; cursor: pointer; border-radius: 6px; transition: background 0.2s; z-index: 2;
+}
+.slide-arrow:hover { background: rgba(0,0,0,0.75); }
+.slide-prev { left: 8px; }
+.slide-next { right: 8px; }
+
+.slide-counter {
+  position: absolute; top: 10px; left: 10px;
+  background: rgba(0,0,0,0.5); color: #fff;
+  font-size: 0.75rem; padding: 3px 8px; border-radius: 6px; pointer-events: none;
+}
+
+.gallery-thumbs { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.thumb-btn {
+  border: 2px solid transparent; border-radius: 0.5rem;
+  overflow: hidden; cursor: pointer; padding: 0; background: none;
+  transition: border-color 0.2s; flex-shrink: 0;
+}
+.thumb-btn.active { border-color: var(--primary); }   /* ← COR DA BORDA DA MINIATURA ACTIVA */
+.thumb-btn img { width: 4.5rem; height: 3.5rem; object-fit: cover; display: block; }   /* ← TAMANHO DAS MINIATURAS */
+
+/* DESCRIÇÃO COM "VER MAIS" */
+.desc-block { margin-bottom: 1.25rem; }
+.desc-text  { color: rgba(13,31,53,0.85); line-height: 1.8; white-space: pre-line; }
+.desc-collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;   /* ← LINHAS VISÍVEIS ANTES DO "VER MAIS" */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.ver-mais-btn {
+  background: none; border: none;
+  color: var(--primary);   /* ← COR DO BOTÃO "VER MAIS" */
+  font-weight: 600; font-size: 0.875rem; cursor: pointer;
+  padding: 0.25rem 0; margin-top: 0.25rem; font-family: 'DM Sans', sans-serif;
+}
+.ver-mais-btn:hover { text-decoration: underline; }
+
+/* BADGES (preço, disponibilidade) */
+.detail-badges   { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.25rem 0; }
+.badge           { padding: 0.5rem 1rem; border-radius: var(--radius); font-size: 0.875rem; font-weight: 600; }
+.badge-accent    { background: var(--accent); color: var(--accent-fg); font-size: 1.1rem; }   /* ← BADGE DO PREÇO */
+.badge-secondary { background: var(--secondary); color: var(--secondary-fg); }                /* ← BADGE DISPONIBILIDADE */
+
+/* SECÇÃO "O QUE INCLUI" */
+.detail-includes    { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1.25rem; }
+.detail-includes ul { list-style: none; }
+.detail-includes li { padding: 0.35rem 0; font-size: 0.875rem; color: rgba(13,31,53,0.8); display: flex; align-items: center; gap: 0.5rem; }
+.detail-includes li::before { content: "✓"; color: var(--primary); font-weight: 700; }   /* ← COR DO ✓ */
+
+/* LIGHTBOX (zoom nas fotos) */
+.lightbox-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.93);   /* ← ESCURECIMENTO DO FUNDO DO ZOOM */
+  z-index: 9999; align-items: center; justify-content: center; flex-direction: column; padding: 1rem;
+}
+.lightbox-overlay img {
+  max-width: 92vw; max-height: 82vh; object-fit: contain;
+  border-radius: 8px; pointer-events: none; user-select: none;
+}
+.lb-close {
+  position: absolute; top: 14px; right: 18px;
+  background: rgba(255,255,255,0.15); border: none; color: #fff;
+  font-size: 1.5rem; cursor: pointer; width: 2.5rem; height: 2.5rem;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+}
+.lb-close:hover { background: rgba(255,255,255,0.3); }
+.lb-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.15); border: none; color: #fff;
+  font-size: 2.5rem; cursor: pointer; padding: 8px 16px;
+  border-radius: 8px; transition: background 0.2s; line-height: 1;
+}
+.lb-arrow:hover { background: rgba(255,255,255,0.3); }
+.lb-prev    { left: 12px; }
+.lb-next    { right: 12px; }
+.lb-counter { color: rgba(255,255,255,0.55); font-size: 0.875rem; margin-top: 10px; }
+
+
+/* ============================================================
+   10. FORMULÁRIO DE CONTACTO
+   ↓ Edita os campos do formulário da página de contactos
+   ============================================================ */
+.contact-item   { margin-bottom: 1.5rem; }
+.contact-item p { color: var(--muted); margin-top: 0.25rem; }
+
+.contact-form       { display: flex; flex-direction: column; gap: 1rem; }
+.contact-form label { font-weight: 500; font-size: 0.875rem; }
+.contact-form input {
+  padding: 0.75rem 1rem; border: 1px solid var(--border);
+  border-radius: var(--radius); font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; background: var(--card); outline: none; transition: border-color 0.2s;
+}
+.contact-form input:focus { border-color: var(--primary); }   /* ← COR DA BORDA AO CLICAR */
+.form-success { margin-top: 1rem; padding: 1rem; background: var(--secondary); border-radius: var(--radius); }
+
+
+/* ============================================================
+   11. RODAPÉ (FOOTER)
+   ↓ Edita aqui a secção do fundo da página
+   ============================================================ */
+.footer {
+  background: #3795d2;   /* ← COR DE FUNDO DO RODAPÉ */
+  color: #ffffff;
+  padding: 3rem 0;
+  margin-top: 5rem;
+}
+.footer h3, .footer h4 { color: #f5c300; }                                           /* ← COR DOS TÍTULOS DO RODAPÉ */
+.footer p, .footer a   { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.875rem; }
+.footer a:hover        { color: #f5c300; }                                            /* ← COR DOS LINKS AO HOVER */
+.footer-grid > div:nth-child(2) { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.15);
+  margin-top: 2rem; padding-top: 1.5rem;
+  text-align: center; font-size: 0.875rem; color: rgba(255,255,255,0.4);
+}
+
+
+/* ============================================================
+   12. BOTÃO FLUTUANTE DO WHATSAPP
+   ↓ Edita o botão verde fixo no canto inferior direito
+   ============================================================ */
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.5rem;   /* ← DISTÂNCIA DO FUNDO do ecrã */
+  right: 1.5rem;    /* ← DISTÂNCIA DA DIREITA do ecrã */
+  z-index: 50;
+  background: var(--whatsapp);
+  color: #fff;
+  width: 3.5rem;    /* ← TAMANHO DO BOTÃO */
+  height: 3.5rem;   /* ← TAMANHO DO BOTÃO */
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+
+
+/* ============================================================
+   SISTEMA DE PÁGINAS — NÃO EDITAR
+   ============================================================ */
+.page        { display: none; }
+.page.active { display: block; }
+
+
+/* ============================================================
+   13. RESPONSIVO — TELEMÓVEL — NÃO EDITAR
+   ============================================================ */
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  .hero-content h1 { font-size: 2.2rem; }
+  .hero-content    { padding: 4rem 0; }
+
+  .grid-3      { grid-template-columns: 1fr; }
+  .grid-2      { grid-template-columns: 1fr; }
+  .detail-grid { grid-template-columns: 1fr; }
+
+  .gallery-main-wrap img { height: 16rem; }
+  .lb-arrow    { font-size: 1.75rem; padding: 6px 10px; }
+  .thumb-btn img { width: 3.5rem; height: 2.75rem; }
+
+  .nav-links {
+    display: none; flex-direction: column;
+    position: absolute; top: 4rem; left: 0; right: 0;
+    background: #2579be;            /* ← COR DO MENU MOBILE (igual à navbar) */
+    border-bottom: 1px solid #1a5f96;
+    padding: 1rem 1.5rem; gap: 0.75rem;
+  }
+  .nav-links.open { display: flex; }
+  .mobile-toggle  { display: flex; }
+}
