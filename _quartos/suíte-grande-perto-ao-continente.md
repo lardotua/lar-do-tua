@@ -1,6 +1,6 @@
 ---
 id: Quarto Grande 220€
-title: Suíte Grande perto ao Continente
+title: Suíte Grande próximo ao Continente
 price: 220€
 location: Rua João Azevedo Lopes
 desc: >-
