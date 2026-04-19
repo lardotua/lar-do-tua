@@ -6,8 +6,8 @@ area: —
 img1: /imagens/whatsapp-image-2026-04-09-at-20.05.50.jpeg
 img2: /imagens/whatsapp-image-2026-04-09-at-20.0we5.50.jpeg
 img3: /imagens/wwewe.jpeg
-id: Quartos Perto do Continente
-title: Quartos Grandes perto do Continente
+id: Suíte Grande perto do Continente
+title: Suíte Grande perto do Continente
 location: Rua João Azevedo Lopes
 desc: >-
   Quartos grandes com cama de casal e um deles com varanda com 5 metros(possível
