@@ -38,9 +38,5 @@ desc: >-
 
   - Sala e cozinha partilhados 
 images:
-  - /imagens/909fa85d-ab7b-42ac-ba2d-0ce91f795c92.jpg
-  - /imagens/2f7a6c86-49a9-4302-9344-80581ddf60b8.jpg
-  - /imagens/captura-de-ecrã-2026-04-19-173250.png
-  - /imagens/captura-de-ecrã-2026-04-19-173531.png
   - /imagens/captura-de-ecrã-2026-04-19-173639.png
 ---
