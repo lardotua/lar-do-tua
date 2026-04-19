@@ -1,7 +1,7 @@
 ---
 id: quarto-av-bombeiros-voluntarios
 title: Quarto na Av. Bombeiros Voluntários
-price: 150€
+price: "150€ "
 location: Av bombeiros voluntários
 desc: 150€ mês mais caução. Despesas á parte.
 available: "Disponível agora "
