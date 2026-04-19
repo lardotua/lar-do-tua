@@ -6,7 +6,7 @@ area: —
 img1: /imagens/whatsapp-image-2026-04-09-at-20.05.50.jpeg
 img2: /imagens/whatsapp-image-2026-04-09-at-20.0we5.50.jpeg
 img3: /imagens/wwewe.jpeg
-id: Suíte Grande perto do Continente
+id: Suíte Grande perto do Continente 250euro
 title: Suíte Grande perto do Continente
 location: Rua João Azevedo Lopes
 desc: >-
