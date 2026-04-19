@@ -4,7 +4,7 @@ title: Quarto na Av. Bombeiros Voluntários
 price: 150€
 location: Av bombeiros voluntários
 desc: 150€ mês mais caução. Despesas á parte.
-available: Disponível agora
+available: "Disponível agora "
 contact: +351 910 788 449
 images:
   - /imagens/f28c715d-8bb2-4a67-adc9-c182ab64ed21.jpg
