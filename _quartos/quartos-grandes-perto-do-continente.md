@@ -38,6 +38,7 @@ desc: >-
 
   - Sala e cozinha partilhados 
 images:
+  - /imagens/e36e77c6-c69a-42e1-bc75-647b9e46dac1.jpg
   - /imagens/whatsapp-image-2026-04-11-at-17.21.58.jpeg
   - /imagens/whatsapp-image-2026-04-11-at-17.22.01.jpeg
   - /imagens/whatsapp-image-2026-04-11-at-17.22.01-1-.jpeg
