@@ -369,6 +369,8 @@ function initSwipe() {
   el.addEventListener('mousedown', onStart);
   el.addEventListener('mouseup', onEnd);
 }
+
+function roomCard(room, showDesc) {
   return `
     <div class="room-card">
       <img src="${room.img}" alt="${room.title}" loading="lazy"
