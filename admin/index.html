@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lar do Tua — Painel de Administração</title>
+  <style>
+    #multi-upload-bar {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      background: #1e2a3a;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+      padding: 16px 20px;
+      min-width: 280px;
+      max-width: 340px;
+      color: #fff;
+      font-family: sans-serif;
+    }
+    #multi-upload-bar h4 {
+      margin: 0 0 10px;
+      font-size: 13px;
+      color: #a8c0d6;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    #multi-upload-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #2e7ef7;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background .2s;
+    }
+    #multi-upload-btn:hover { background: #1a5fd4; }
+    #multi-upload-status {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #7fbfff;
+      min-height: 16px;
+    }
+    #multi-upload-progress {
+      margin-top: 8px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.1);
+      overflow: hidden;
+      display: none;
+    }
+    #multi-upload-progress-bar {
+      height: 100%;
+      background: #2e7ef7;
+      width: 0%;
+      transition: width .2s;
+    }
+    #multi-file-input { display: none; }
+  </style>
+</head>
+<body>
+  <script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>
+  <script>
+  (function () {
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    const waitForCMS = setInterval(() => {
+      if (typeof window.CMS === 'undefined') return;
+      clearInterval(waitForCMS);
+
+      // Injeta painel flutuante
+      const bar = document.createElement('div');
+      bar.id = 'multi-upload-bar';
+      bar.innerHTML = [
+        '<h4>📷 Adicionar várias fotos de uma vez</h4>',
+        '<button id="multi-upload-btn">',
+        '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">',
+        '<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>',
+        '<polyline points="17 8 12 3 7 8"/>',
+        '<line x1="12" y1="3" x2="12" y2="15"/>',
+        '</svg>',
+        'Selecionar fotos (múltiplas)',
+        '</button>',
+        '<div id="multi-upload-status"></div>',
+        '<div id="multi-upload-progress"><div id="multi-upload-progress-bar"></div></div>',
+        '<input type="file" id="multi-file-input" multiple accept="image/*" />'
+      ].join('');
+      document.body.appendChild(bar);
+
+      const btn     = document.getElementById('multi-upload-btn');
+      const input   = document.getElementById('multi-file-input');
+      const status  = document.getElementById('multi-upload-status');
+      const prog    = document.getElementById('multi-upload-progress');
+      const progBar = document.getElementById('multi-upload-progress-bar');
+
+      btn.addEventListener('click', () => input.click());
+
+      input.addEventListener('change', async () => {
+        const files = Array.from(input.files);
+        if (!files.length) return;
+
+        status.style.color = '#7fbfff';
+        prog.style.display = 'block';
+        let done = 0;
+
+        for (const file of files) {
+          status.textContent = 'A enviar ' + (done + 1) + ' de ' + files.length + ': ' + file.name;
+          progBar.style.width = Math.round((done / files.length) * 100) + '%';
+
+          try {
+            await uploadOne(file);
+            done++;
+          } catch(e) {
+            console.warn('Erro:', file.name, e);
+          }
+          await sleep(700);
+        }
+
+        progBar.style.width = '100%';
+        status.textContent = '✅ ' + done + ' foto(s) adicionada(s)!';
+        status.style.color = '#4caf50';
+        input.value = '';
+
+        setTimeout(() => {
+          prog.style.display = 'none';
+          progBar.style.width = '0%';
+          status.textContent = '';
+        }, 4000);
+      });
+
+      async function uploadOne(file) {
+        // Procura o botão "Add images" no campo de fotos
+        const addBtn = findAddBtn();
+        if (!addBtn) throw new Error('Botão não encontrado. Estás a editar um quarto?');
+
+        addBtn.click();
+        await sleep(500);
+
+        // Pega o último input[type=file] que apareceu (excluindo o nosso próprio)
+        const allInputs = [...document.querySelectorAll('input[type="file"]')]
+          .filter(el => el.id !== 'multi-file-input');
+
+        if (!allInputs.length) throw new Error('Input de ficheiro não encontrado');
+
+        const target = allInputs[allInputs.length - 1];
+        const dt = new DataTransfer();
+        dt.items.add(file);
+        target.files = dt.files;
+        target.dispatchEvent(new Event('change', { bubbles: true }));
+        await sleep(300);
+      }
+
+      function findAddBtn() {
+        // Tenta localizar o botão de adicionar dentro do campo "images"
+        const allBtns = [...document.querySelectorAll('button')];
+
+        // Prioridade 1: botão cujo texto seja "Add images" (label Decap)
+        const exact = allBtns.find(b => {
+          const t = b.textContent.trim().toLowerCase();
+          return t === 'add images' || t === 'add fotos' || t === 'adicionar fotos';
+        });
+        if (exact) return exact;
+
+        // Prioridade 2: qualquer botão "Add ..." dentro de um container de lista
+        return allBtns.filter(b =>
+          b.textContent.trim().toLowerCase().startsWith('add') &&
+          (b.closest('[class*="List"]') || b.closest('[class*="list"]'))
+        ).pop() || null;
+      }
+
+      // Mostra/oculta o painel conforme a rota
+      function checkRoute() {
+        const h = window.location.hash || '';
+        const editing = h.includes('/quartos/') || h.includes('/collections/quartos/entries/');
+        bar.style.display = editing ? 'block' : 'none';
+      }
+      window.addEventListener('hashchange', checkRoute);
+      setInterval(checkRoute, 1000);
+      checkRoute();
+
+    }, 300);
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+backend:
+  name: github
+  repo: lardotua/lar-do-tua
+  branch: main
+
+media_folder: "imagens"
+public_folder: "/imagens"
+
+collections:
+  - name: "quartos"
+    label: "Quartos"
+    folder: "_quartos"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    fields:
+      - { label: "🙈 Ocultar quarto do site", name: "hidden", widget: "boolean", default: false, hint: "Ativa para esconder este quarto do site sem o apagar" }
+      - { label: "ID único", name: "id", widget: "string", hint: "Ex: quarto-centro-1 (sem espaços, sem acentos)" }
+      - { label: "Título", name: "title", widget: "string", hint: "Ex: Quarto junto ao Centro de Saúde" }
+      - { label: "Preço", name: "price", widget: "string", hint: "Ex: 250€/mês" }
+      - { label: "Localização", name: "location", widget: "string", hint: "Ex: Rua do Tua, Mirandela" }
+      - { label: "Descrição", name: "desc", widget: "text" }
+      - { label: "Disponibilidade", name: "available", widget: "string", default: "Disponível agora" }
+      - { label: "Contacto", name: "contact", widget: "string", hint: "Ex: João Silva — 912 345 678" }
+      - label: "O que inclui (detalhes)"
+        name: "details"
+        widget: "list"
+        field: { label: "Item", name: "item", widget: "string" }
+        hint: "Ex: Wi-Fi incluído, Casa de banho privativa, etc."
+      - { label: "Link do anúncio original", name: "link", widget: "string", required: false }
+      - label: "Fotos"
+        name: "images"
+        widget: "list"
+        min: 1
+        max: 15
+        field: { label: "Foto", name: "image", widget: "image" }
+        hint: "Adiciona entre 1 a 15 fotos. Usa o botão '+ Adicionar várias fotos de uma vez' em baixo."
