@@ -1,4 +1,5 @@
 ---
+hidden: true
 price: "250€/mês "
 available: Entrada no fim do mês de Abril
 contact: 910 788 449
