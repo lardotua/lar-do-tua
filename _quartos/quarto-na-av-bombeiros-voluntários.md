@@ -1,4 +1,5 @@
 ---
+hidden: true
 id: quarto-av-bombeiros-voluntarios
 title: Quarto na Av. Bombeiros Voluntários
 price: "150€ "
