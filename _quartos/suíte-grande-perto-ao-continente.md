@@ -1,5 +1,5 @@
 ---
-hidden: true
+hidden: false
 id: Quarto Grande 220€
 title: Suíte Grande próximo ao Continente
 price: 220€
